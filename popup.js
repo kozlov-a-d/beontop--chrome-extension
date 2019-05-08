@@ -3,15 +3,11 @@
  * может обращаться к DOM всплывающего окна и умеет слать сообщения к background.js.
  */
 
-let consoleLog = text => {
+let message = text => {
     chrome.tabs.executeScript({
         code: `console.log("${text}")`
     });
 }
-
-
-
-
 
 const checkTrackingCode = (() => {
 
@@ -52,7 +48,7 @@ const checkTrackingCode = (() => {
         });
 
 
-        consoleLog('request-check-tracking start');
+        // message('request-check-tracking start');
         // отправка в content.js
         chrome.tabs.getSelected(null, function(tab){
             chrome.tabs.sendMessage(tab.id, {type: "request-check-tracking", msg: 'test'});
@@ -64,9 +60,9 @@ const checkTrackingCode = (() => {
     chrome.extension.onMessage.addListener(function (request, sender, sendResponse){
         switch (request.type) {
             case "response-check-tracking":
-                consoleLog('response-check-tracking success');
+                // message('response-check-tracking success');
                 // do something
-                showResults(request.data.myProperty)
+                showResults(request.data.myProperty);
                 break;
         }
     });
