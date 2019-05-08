@@ -36,18 +36,6 @@ const checkTrackingCode = (() => {
 
     // Request
     self.elements.btn.addEventListener('click', function() { 
-
-        chrome.tabs.executeScript({
-            code: `
-            (function() {
-                console.log((typeof ga !== 'undefined') ? ga.getAll()[0].get('trackingId') : 'undefined');
-                return ((typeof ga !== 'undefined') ? ga.getAll()[0].get('trackingId') : 'undefined');
-            })();`
-        }, function(results) {
-            console.log(results[0]);
-        });
-
-
         // message('request-check-tracking start');
         // отправка в content.js
         chrome.tabs.getSelected(null, function(tab){
